@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="StyleSheet1.css">
+    <title></title>
+
+</head>
+<body>
+
+    <fieldset>
+        <legend>Neue Adresse anlegen</legend>
+        
+
+        <label for="name">
+            Name:
+            <input id="name" name="name">
+        </label>
+
+        <label for="ort">
+            Ort:
+            <input id="ort" name="ort">
+        </label>
+
+
+        <label for="sort">Sortierung:</label>
+        <select name="sort" id="sort">
+            <option value="ort">Ort</option>
+            <option value="plz">PLZ</option>
+            <option value="name">Name</option>
+        </select>
+
+        <button id="close-image"><img src="icon/search-13-16.ico"></button>
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+                <legend>Gefundene Adressen</legend>
+
+        <table id='output'>
+
+            <tr>
+                <th>Name</th>
+                <th>EMail</th>
+                <th>Ort</th>
+                <th>PLZ</th>
+                <th>Adresse</th>
+                <th>Aktion</th>
+            </tr>
+
+            <tr>
+                <td>Fabian Schilling</td>
+                <td>fabian@schilling.de</td>
+                <td>Aindling</td>
+                <td>443355</td>
+                <td>Strasse 21</td>
+                <td>
+                    <button id="close-image"><img src="icon/edit-16.ico"></button>
+                    <button id="close-image"><img src="icon/trash-4-16.ico"></button>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Rainer Zufall</td>
+                <td>rainer.zufall@mail.de</td>
+                <td>Gluekshausen</td>
+                <td>123456</td>
+                <td>Keinzufall 213b</td>
+                <td>
+                    <button id="close-image"><img src="icon/edit-16.ico"></button>
+                    <button id="close-image"><img src="icon/trash-4-16.ico"></button>
+
+                </td>
+            </tr>
+
+        </table>
+    </fieldset>
+
+</body>
+</html>
