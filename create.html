@@ -9,23 +9,26 @@
 </head>
 <body>
     <fieldset class="form-style-2">
-        <form action="" method="post">
-            <label for="field1"><span>Name: <span class="required"></span></span><input type="text" class="input-field" name="field1" value="" /></label>
-            <label for="field2"><span>E-Mail: <span class="required"></span></span><input type="email" class="input-field" name="field2" value="" /></label>
-            <label for="field3"><span>Postleitzahl: <span class="required"></span></span><input type="number" class="input-field" name="field3" value="" /></label>
-            <label for="field4"><span>Ort: <span class="required"></span></span><input type="text" class="input-field" name="field4" value="" /></label>
-            <label for="field5"><span>Adresse: <span class="required"></span></span><input type="text" class="input-field" name="field5" value="" /></label>
+        <form action="start.html" method="GET">
+            <label for="field1"><span>Name: <span class="required"></span></span><input type="text" class="input-field" name="field1" value="" required/></label>
+            <label for="field2"><span>E-Mail: <span class="required"></span></span><input type="email" class="input-field" name="field2" value="" required/></label>
+            <label for="field3"><span>Postleitzahl: <span class="required"></span></span><input type="number" class="input-field" name="field3" value="" required/></label>
+            <label for="field4"><span>Ort: <span class="required"></span></span><input type="text" class="input-field" name="field4" value="" required/></label>
+            <label for="field5"><span>Adresse: <span class="required"></span></span><input type="text" class="input-field" name="field5" value="" required/></label>
+
+
+            <div class="center">
+
+                <label action="start.html" method="get" target="_blank">
+                    <input type="submit" formnovalidate value="abbrechen" />
+                </label>
+                _
+                <label action="start.html" method="post" target="_blank">
+                    <input type="submit" value="Speichen" />
+                </label>
+            </div>
         </form>
 
-        <div class="center">
-            <form action="start.html" method="get" target="_blank">
-                <input type="submit" value="Abbrechen" />
-            </form>
-            _
-            <form action="https://www.w3docs.com/" method="get" target="_blank">
-                <input type="submit" value="Speichen" />
-            </form>
-        </div>
-    </fieldset>
+        </fieldset>
 </body>
 </html>

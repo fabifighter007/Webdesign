@@ -136,3 +136,14 @@ body {
         color: #fff;
         margin: 0 auto; /* or margin: 0 auto 0 auto */
     }
+
+
+
+    // Entfernt Pfeiles samp Ende desc Feldes
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
