@@ -57,10 +57,15 @@ class AdresseDTO  {
 	 */
 	pruefe() {
 		// *** (1) ***
-		if (this.validateEmail(this.email) && this.notNull(this.name) && this.notNull(this.email) && this.notNull(this.plz) && this.notNull(this.ort) && this.notNull(this.strasse) && this.plz>0) {
-
+		if (this.notNull(this.name) && this.notNull(this.email) && this.notNull(this.plz) && this.notNull(this.ort) && this.notNull(this.strasse) && this.plz > 0) {
+			if (this.validateEmail(this.email)) {
+				console.log("Passt!");
+			} else {
+				throw new Error('Whoops!\nE-mail wurde im falschen Format angegeben!');
+            }
 		} else {
-			return "Fehler! Alle Felder müssen ausgefüllt werden.";
+			console.log("Falsche Eingabe!");
+			throw new Error('Whoops!\nAlle Felder müssen ausgefüllt sein!');
         }
 	}
 
@@ -75,6 +80,7 @@ class AdresseDTO  {
 	/**
 	 * Liefert true, falls 'email' eine korrekte E-Mail-Adresse enthält.
 	 */
+
 	validateEmail(email) {
     	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     	return re.test(email);
