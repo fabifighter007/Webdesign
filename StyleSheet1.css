@@ -57,6 +57,14 @@ body {
         min-width: 160px;
     }
 
+    #output .thbig {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        background-color: gray;
+        color: white;
+        min-width: 250px;
+    }
 
 
 
@@ -139,11 +147,15 @@ body {
 
 
 
-    // Entfernt Pfeiles samp Ende desc Feldes
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+/*Entfernt Pfeiles samp Ende des Feldes*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
