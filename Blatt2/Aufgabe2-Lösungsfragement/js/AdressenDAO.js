@@ -52,11 +52,12 @@ class AdressenDAO {
 	 */
 	filter(adresse, name, ort) {
 		// *** (2) ***
-		if (adresse.name.toLowerCase().startsWith(name) || adresse.ort.toLowerCase().startsWith(ort)) {
+		if (adresse.name.startsWith(name) || adresse.ort.startsWith(ort)) {
 			return true;
 		}
 		return false;
 	};	
+
 	
 	/**
 	 * Gibt das übergebene AdresseDTO-Array 'liste'' sortiert nach 'sortierung' (= string-Wert 
@@ -64,19 +65,30 @@ class AdressenDAO {
 	 * definiert, die dann für die Sortierung mit "sort" genutzt wird.
 	 */
 	sortiereAdressenListe(liste, sortierung) {
+		if (sortierung == "Name") {
+			liste.sort(function (a, b) {
+				if (a.name < b.name) { return 1; }
+				if (a.name > b.name) { return -1; }
+				return 0;
+			})
+
+		} else if (sortierung == "PLZ") {
+			liste.sort(function (a, b) {
+				if (a._plz < b._plz) { return 1; }
+				if (a._plz > b._plz) { return -1; }
+				return 0;
+			})
+		} else {
+			liste.sort(function (a, b) {
+				if (a.ort < b.ort) { return 1; }
+				if (a.ort > b.ort) { return -1; }
+				return 0;
+			})
+        }
+
 		// *** (3) ***
-		liste.sort();
 	}
 
-	compare(a, b) {
-	if (a.last_nom < b.last_nom) {
-		return -1;
-	}
-	if (a.last_nom > b.last_nom) {
-		return 1;
-	}
-	return 0;
-}
 
 	/*
 	 * Methoden zum Zugriff auf die adresseenliste
@@ -153,7 +165,7 @@ class AdressenDAO {
 	 */
 	loescheAdresse(id) {
 		// *** (4) ***
-		adressenArray.get(id).set(-1);
+		adressenArray[id] = -1;
 
 		if (this.findeAdresseZuId(adresse.id) !== "undefined") {
 			this._adressenArray[adresse.id] = adresse;

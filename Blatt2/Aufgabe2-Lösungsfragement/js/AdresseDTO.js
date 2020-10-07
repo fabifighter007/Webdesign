@@ -57,7 +57,7 @@ class AdresseDTO  {
 	 */
 	pruefe() {
 		// *** (1) ***
-		if (this.validateEmail(this.email) && this.notNull(this.name) && this.notNull(this.email) && this.notNull(this.plz) && this.notNull(this.ort) && this.notNull(this.strasse)) {
+		if (this.validateEmail(this.email) && this.notNull(this.name) && this.notNull(this.email) && this.notNull(this.plz) && this.notNull(this.ort) && this.notNull(this.strasse) && this.plz>0) {
 
 		} else {
 			return "Fehler! Alle Felder müssen ausgefüllt werden.";
