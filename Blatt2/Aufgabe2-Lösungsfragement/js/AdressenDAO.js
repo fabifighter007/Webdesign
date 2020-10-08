@@ -52,10 +52,23 @@ class AdressenDAO {
 	 */
 	filter(adresse, name, ort) {
 		// *** (2) ***
-		if (adresse.name.startsWith(name) || adresse.ort.startsWith(ort)) {
+		if (adresse.id != -1) {
+			if (name != "") {
+				if (adresse.name.startsWith(name)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (ort != "") {
+				if (adresse.ort.startsWith(ort)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 			return true;
 		}
-		return false;
+
 	};	
 
 	
@@ -64,6 +77,7 @@ class AdressenDAO {
 	 * Name, Ort oder PLZ) zurück. Abhängig vom Wert von 'sortierung' wird eine passende sortierFunktion
 	 * definiert, die dann für die Sortierung mit "sort" genutzt wird.
 	 */
+
 	sortiereAdressenListe(liste, sortierung) {
 		if (sortierung == "Name") {
 			liste.sort(function (a, b) {
