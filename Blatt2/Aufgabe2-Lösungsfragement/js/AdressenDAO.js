@@ -89,8 +89,8 @@ class AdressenDAO {
 
 		} else if (sortierung == "PLZ") {
 			liste.sort(function (a, b) {
-				if (a._plz < b._plz) { return 1; }
-				if (a._plz > b._plz) { return -1; }
+				if (Number(a.plz) < Number(b.plz)) { return -1; }
+				if (Number(a.plz) > Number(b.plz)) { return 1; }
 				return 0;
 			})
 		} else {
