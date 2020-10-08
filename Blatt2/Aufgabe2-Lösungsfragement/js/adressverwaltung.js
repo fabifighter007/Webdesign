@@ -52,6 +52,7 @@ function loescheAdresse(buttonWidget) {
 /*
  * Hilfsfunktionen für Suchdialog
  */
+
 function belegeZeile(table, adresse) {
 	console.log("belegeZeile: adresse = " + adresse.toString());
 

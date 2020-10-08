@@ -165,11 +165,8 @@ class AdressenDAO {
 	 */
 	loescheAdresse(id) {
 		// *** (4) ***
-		this._adressenArray[adresse.id] = -1;
-
-		this.laden();
-		if (this.findeAdresseZuId(adresse.id) !== "undefined") {
-			this._adressenArray[adresse.id] = -1;
+		if (this.findeAdresseZuId(id) !== "undefined") {
+			this._adressenArray[id].id = -1;
 			this.speichern();
 		}
 	}
