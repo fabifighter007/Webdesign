@@ -1,0 +1,88 @@
+<div class="container antraege-bearbeiten-container">
+    <p>
+        <span class="titel">Urlaubsantragsverwaltung</span>
+        <span class="begruessung">Hallo, {{ mitarbeiter.name }}!</span>
+        <button class="btn btn-primary app-btn" (click)="schliessen()">Schliessen</button>
+    </p>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" *ngIf="mitarbeiter != null && mitarbeiter.mitarbeiter.length > 0">
+            <a class="nav-link" data-toggle="tab" href="#ma-antraege">Mitarbeiter Anträge</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#meine-antraege">Meine Anträge</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="ma-antraege" class="container tab-pane">
+        </div>
+        <div id="meine-antraege" class="container tab-pane active">
+            <div class="panel panel-default">
+                <div class="panel-header  neu-panel">
+                    <button type="button" class="btn btn-default btn-sm neu-button" data-toggle="modal" data-target="#antrag-stellen-dialog">
+                        <span class="oi oi-plus"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <span *ngIf="antraege('').length == 0" class="keine-antraege">
+                        Keine Anträge vorhanden!
+                    </span>
+                    <table *ngIf="antraege('').length > 0" class="table table-hover table-responsive table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>gestellt am/um</th>
+                                <th>von<span class="oi oi-arrow-bottom"></span></th>
+                                <th>bis</th>
+                                <th>Tage</th>
+                                <th>Status</th>
+                                <th>Bemerkung</th>
+                                <td>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let antrag of antraege(''); let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
+                                <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
+                                <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
+                                <td>{{ tage(antrag.von, antrag.bis) }}</td>
+                                <td>{{ antrag.status }}</td>
+                                <td>{{ antrag.bemerkung }}</td>
+                                <td>
+                                    <button class="btn btn-warning" (click)="antragLoeschen(antrag.id)" 
+                                        [disabled]="antrag.status != 'unbearbeitet'">löschen</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="antrag-stellen-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ablehnen-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

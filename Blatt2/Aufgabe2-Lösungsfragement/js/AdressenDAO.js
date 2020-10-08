@@ -68,7 +68,6 @@ class AdressenDAO {
 			}
 			return true;
 		}
-
 	};	
 
 	
@@ -78,6 +77,8 @@ class AdressenDAO {
 	 * definiert, die dann für die Sortierung mit "sort" genutzt wird.
 	 */
 
+
+	// *** (3) ***
 	sortiereAdressenListe(liste, sortierung) {
 		if (sortierung == "Name") {
 			liste.sort(function (a, b) {
@@ -100,7 +101,6 @@ class AdressenDAO {
 			})
         }
 
-		// *** (3) ***
 	}
 
 
@@ -188,6 +188,7 @@ class AdressenDAO {
 	/*
 	* Getter für adresseDAO ---------------------------------------------
 	*/
+
 	static gibAdresseDAO() {
 		var dao = "undefined";
 		
