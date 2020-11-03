@@ -53,7 +53,13 @@ class AdressenDAO {
 	filter(adresse, name, ort) {
 		// *** (2) ***
 		if (adresse.id != -1) {
-			if (name != "") {
+			if(name != "" && ort != "") {
+				if (adresse.name.startsWith(name) &&  adresse.ort.startsWith(ort)) {
+					return true;
+				} else {
+					return false;
+				}	
+			} else if (name != "") {
 				if (adresse.name.startsWith(name)) {
 					return true;
 				} else {
@@ -89,8 +95,8 @@ class AdressenDAO {
 
 		} else if (sortierung == "PLZ") {
 			liste.sort(function (a, b) {
-				if (Number(a.plz) < Number(b.plz)) { return -1; }
-				if (Number(a.plz) > Number(b.plz)) { return 1; }
+				if (Number(a.plz) < Number(b.plz)) { return 1; }
+				if (Number(a.plz) > Number(b.plz)) { return -1; }
 				return 0;
 			})
 		} else {
