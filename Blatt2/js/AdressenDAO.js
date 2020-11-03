@@ -190,6 +190,7 @@ class AdressenDAO {
 			this.speichern();
 		}
 	}
+	
 
 	/*
 	* Getter für adresseDAO ---------------------------------------------
