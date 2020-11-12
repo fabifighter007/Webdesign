@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-.antraege-bearbeiten-container form {
+.antraege-bearbeiten-container form { /*done*/
     padding: 20px 20px 0px 20px;
 }
 
@@ -83,4 +83,17 @@ span.begruessung {
 
 .btn:disabled {
     background-color: lightgray;
+}
+
+.test {
+  color: red;
+}
+
+.fieldset {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+  border: 1px solid grey;
+  color: black;
+  background: #e8e8e8;
+  border-radius: 5px;
+  outline: none;
 }

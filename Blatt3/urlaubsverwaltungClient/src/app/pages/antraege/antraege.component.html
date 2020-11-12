@@ -4,6 +4,7 @@
         <span class="begruessung">Hallo, {{ mitarbeiter.name }}!</span>
         <button class="btn btn-primary app-btn" (click)="schliessen()">Schliessen</button>
     </p>
+
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" *ngIf="mitarbeiter != null && mitarbeiter.mitarbeiter.length > 0">
@@ -13,16 +14,102 @@
             <a class="nav-link active" data-toggle="tab" href="#meine-antraege">Meine Anträge</a>
         </li>
     </ul>
+
     <div class="tab-content">
-        <div id="ma-antraege" class="container tab-pane">
+      <div id="ma-antraege" class="container tab-pane">
+        <div class="panel-body">
+          <span *ngIf="antraege('').length == 0" class="keine-antraege">
+            Keine Anträge vorhanden!
+          </span>
+          <table *ngIf="antraege('').length > 0" class="table table-hover table-responsive table-condensed">
+            <thead>
+              <tr>
+                <th>Nr</th>
+                <th>Antragsteller</th>
+                <th>gestellt am/um</th>
+                <th>von<span class="oi oi-arrow-bottom"></span></th>
+                <th>bis</th>
+                <th>Tage</th>
+                <th>Status</th>
+                <td>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let antrag of antraege(''); let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ antrag.antragsteller }}</td>
+                <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
+                <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
+                <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
+                <td>{{ tage(antrag.von, antrag.bis) }}</td>
+                <td>{{ antrag.status }}</td>
+                <td>
+                  <button class="btn btn-success" (click)="antragLoeschen(antrag.id)"
+                          [disabled]="antrag.status != 'unbearbeitet'">
+                    genehmigen
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="antragLoeschen(antrag.id)"
+                          [disabled]="antrag.status != 'unbearbeitet'">
+                    ablehnen
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-warning" (click)="antragLoeschen(antrag.id)"
+                          [disabled]="antrag.status == 'unbearbeitet'">
+                    löschen
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div id="meine-antraege" class="container tab-pane active">
             <div class="panel panel-default">
+
                 <div class="panel-header  neu-panel">
                     <button type="button" class="btn btn-default btn-sm neu-button" data-toggle="modal" data-target="#antrag-stellen-dialog">
                         <span class="oi oi-plus"></span>
                     </button>
                 </div>
+
                 <div class="panel-body">
                     <span *ngIf="antraege('').length == 0" class="keine-antraege">
                         Keine Anträge vorhanden!
@@ -64,15 +151,55 @@
 </div>
 
 <div class="modal" id="antrag-stellen-dialog">
+
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Urlaubsantrag stellen</h4>
         </div>
+        <div class="modal-body">
+
+          <form class="antraege-bearbeiten-container form" role="form" #timeForm="ngForm">
+
+            <div class="form-group row">
+              <label for="start_datum" class="col-sm-2 col-form-label">Startdatum</label>
+              <div class="col-sm-8">
+                <input class="fieldset" type="date" ngModel  name="start_datum" [(ngModel)]="start_datum" required #datum1="ngModel"> <br />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="end_datum" class="col-sm-2 col-form-label">Enddatum</label>
+              <div class="col-sm-8">
+                <input class="fieldset" type="date" ngModel name="end_datum" [(ngModel)]="end_datum" required #datum2="ngModel"> <br />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="anzahl_tage" class="col-sm-2 col-form-label">Anzahl</label>
+              <div class="col-sm-8">
+                <label for="ausgabe_tage" class="col-sm-2 col-form-label">hier einfügen</label><br />
+              </div>
+            </div>
+
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+
+          <div class="form-group row">
+            <button class="btn btn-primary " name="submit" type="submit" (click)="erstellen(timeForm)">
+              senden
+            </button>
+          </div>
+
+          <div class="form-group row">
+            <button type="button" class="btn btn-primary" id="antrag-stellen-dialog-schliessen" data-dismiss="modal">schließen</button>
+          </div>
+
+        </div>
+      </div>
     </div>
 </div>
 
@@ -80,6 +207,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+
             </div>
             <div class="modal-body">
             </div>

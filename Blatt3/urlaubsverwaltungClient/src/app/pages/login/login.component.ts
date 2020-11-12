@@ -18,10 +18,10 @@ export class LoginComponent {
 
     public constructor(private router: Router, private loginService: LoginService, 
             private urlaubsantragService: UrlaubsantragService) {
-        this.message = 'Bitte geben Sie Benutzername und Passwort ein.';
+        this.message = 'Bitte geben Sie Benutzername und Passwort ein!';
     }
 
-    public login(form: Form): void {
+  public login(form: Form): void {
         this.loginService.pruefeLogin(this.benutzername, this.passwort)
         .then((benutzer: Benutzer) => {
             this.urlaubsantragService.gibMitarbeiterZuId(benutzer.mitarbeiterId)

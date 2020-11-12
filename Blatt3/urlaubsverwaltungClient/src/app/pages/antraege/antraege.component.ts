@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { LoginService } from 'src/app/services/LoginService.service';
 import { Benutzer } from 'src/app/models/Benutzer';
 import { Mitarbeiter } from 'src/app/models/Mitarbeiter';
+import { Form } from '@angular/forms';
 
 @Component({
     selector: 'app-antraege',
@@ -20,6 +21,9 @@ export class AntraegeComponent implements OnInit {
     public ueberstundentage: number;
     public urlaubstage_nehmen: number;
     public ueberstundentage_nehmen: number;
+
+    public start_datum: string;
+    public end_datum: string;
 
     public constructor(private router: Router, private speicherService: UrlaubsantragService, 
             private loginService: LoginService) {
@@ -97,4 +101,14 @@ export class AntraegeComponent implements OnInit {
         // TODO
     }
 
+  public erstellen(form: Form): void {
+    console.log("Pressed");
+    if (this.start_datum == undefined || this.end_datum == undefined) {
+
+    } else {
+      this.aktuellerAntrag = new Urlaubsantrag(UrlaubsantragService.length, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD"), "unbearbeitet", this.bemerkung);
+      this.speicherService.speichereUrlaubsantrag(this.aktuellerAntrag);
+      this.antragStellenDialogSchliessen();
+    }
+    }
 }
