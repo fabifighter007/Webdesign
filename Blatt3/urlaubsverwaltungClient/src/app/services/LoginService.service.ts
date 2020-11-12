@@ -15,6 +15,12 @@ export class LoginService {
     public constructor(private httpClient: HttpClient) {
     }
 
+    /**
+     * Ruft den Server auf: POST login mit dem JSON-Benutzerobjekt als Parameter.
+     * Liefert das aktuelle Benutzerobjekt (mit MitarbeiterID) im Erfolgsfall zurück.
+     * @param benutzername 
+     * @param passwort 
+     */
     public pruefeLogin(benutzername: string, passwort: string): Promise<void | Benutzer> {
             return this.httpClient.post(this.uri + 'login', new Benutzer(-1, benutzername, passwort, -1))
             .toPromise()

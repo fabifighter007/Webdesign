@@ -24,13 +24,13 @@
               "src/assets"
             ],
             "styles": [
-                "src/styles.css",
-                "./node_modules/bootstrap/dist/css/bootstrap.css",
-                "./node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css"
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css"
             ],
             "scripts": [
-                "./node_modules/jquery/dist/jquery.min.js",
-                "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
             ]
           },
           "configurations": {
@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "urlaubsverwaltungClient"
+    }
+  },
+  "defaultProject": "urlaubsverwaltungClient",
+  "cli": {
+    "analytics": "babf63df-3bd3-48c6-874e-a06a467aa3fc"
+  }
 }

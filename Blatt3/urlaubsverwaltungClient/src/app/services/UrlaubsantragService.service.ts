@@ -12,6 +12,11 @@ export class UrlaubsantragService {
     public constructor(private httpClient: HttpClient) {
     }
 
+    /**
+     * Ruft den Server zum Speichern von 'antrag' auf: POST urlaubsantrag mit 'antrag' als Parameter.
+     * Liefert im Erfolgsfall die vom Server vergebene ID für den Antrag zurück.
+     * @param antrag 
+     */
     public speichereUrlaubsantrag(antrag: Urlaubsantrag): Promise<number> {
         return this.httpClient.post(this.uri + 'urlaubsantrag', antrag)
             .toPromise()
@@ -19,6 +24,10 @@ export class UrlaubsantragService {
             .catch(this.handleError);
     }
 
+    /**
+     * Liefert ein Array mit Urlaubsanträgen zu 'mitarbeiterId'.
+     * @param mitarbeiterId 
+     */
     public gibAntraege(mitarbeiterId: number): Promise<Array<Urlaubsantrag>> {
         return this.httpClient.get(this.uri + 'urlaubsantraege/' + mitarbeiterId)
             .toPromise()
@@ -37,6 +46,10 @@ export class UrlaubsantragService {
             .catch(this.handleError);
     }
 
+    /**
+     * Liefert den Mitarbeiter zu 'mitarbeiterId'.
+     * @param mitarbeiterId 
+     */
     public gibMitarbeiterZuId(mitarbeiterId: number): Promise<Mitarbeiter> {
         return this.httpClient.get(this.uri + 'mitarbeiter/' + mitarbeiterId)
             .toPromise()
@@ -47,12 +60,15 @@ export class UrlaubsantragService {
             .catch(this.handleError);
     }
 
-
     public statusAendern(geaenderterAntrag: Urlaubsantrag, status: string): void {
         geaenderterAntrag.status = status;
         this.aktualisiereUrlaubsantrag(geaenderterAntrag);
     }
 
+    /**
+     * Speichert den geänderten Antrag.
+     * @param antrag 
+     */
     public aktualisiereUrlaubsantrag(antrag: Urlaubsantrag): Promise<void> {
         return this.httpClient.put(this.uri + 'urlaubsantrag/' + antrag.id, antrag)
             .toPromise()
@@ -60,6 +76,10 @@ export class UrlaubsantragService {
             .catch(this.handleError);
     }
 
+    /**
+     * Löscht den Antrag mit der ID 'id'.
+     * @param id 
+     */
     public loescheUrlaubsantrag(id: number): Promise<void> {
         return this.httpClient.delete(this.uri + 'urlaubsantrag/' + id)
             .toPromise()
