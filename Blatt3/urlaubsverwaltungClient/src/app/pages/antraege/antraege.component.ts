@@ -121,11 +121,29 @@ export class AntraegeComponent implements OnInit {
   }
 
   public antragLoeschen(id: number): void {
+    if (this.aktuellerAntrag.status == "unbearbeitet") {
+      this.speicherService.loescheUrlaubsantrag(id);
+    } else {
+      if (this.speicherService.gibMitarbeiterZuId(id) == this.mitarbeiter) {
+
+      }
+    }
         // TODO
     }
 
   public statusAendern(antrag: Urlaubsantrag, status: string): void {
     this.speicherService.statusAendern(antrag, status);
+  }
+
+  public antragAblehnen(form: Form): void {
+    console.log(this.bemerkung);
+    this.bemerkung = this.bemerkung;
+    this.aktuellerAntrag.bemerkung = this.bemerkung;
+    this.speicherService.statusAendern(this.aktuellerAntrag, "abgelehnt");
+  }
+
+  public setAktuellerAuftrag(a: Urlaubsantrag): void {
+    this.aktuellerAntrag = a;
   }
 
   public erstellen(form: Form): void {
