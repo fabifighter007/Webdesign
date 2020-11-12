@@ -18,10 +18,10 @@
     <div class="tab-content">
       <div id="ma-antraege" class="container tab-pane">
         <div class="panel-body">
-          <span *ngIf="antraege('').length == 0" class="keine-antraege">
+          <span *ngIf="antraege2('').length == 0" class="keine-antraege">
             Keine Anträge vorhanden!
           </span>
-          <table *ngIf="antraege('').length > 0" class="table table-hover table-responsive table-condensed">
+          <table *ngIf="antraege2('').length > 0" class="table table-hover table-responsive table-condensed">
             <thead>
               <tr>
                 <th>Nr</th>
@@ -36,7 +36,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let antrag of antraege(''); let i = index">
+              <tr *ngFor="let antrag of antraege2(''); let i = index">
                 <td>{{ i+1 }}</td>
                 <td>{{ antrag.antragsteller }}</td>
                 <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
@@ -45,7 +45,7 @@
                 <td>{{ tage(antrag.von, antrag.bis) }}</td>
                 <td>{{ antrag.status }}</td>
                 <td>
-                  <button class="btn btn-success" (click)="antragLoeschen(antrag.id)"
+                  <button class="btn btn-success" (click)="statusAendern(antrag, 'genehmigt')"
                           [disabled]="antrag.status != 'unbearbeitet'">
                     genehmigen
                   </button>

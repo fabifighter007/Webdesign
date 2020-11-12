@@ -97,9 +97,36 @@ export class AntraegeComponent implements OnInit {
         return result;
     }
 
-    public antragLoeschen(id: number): void {
+  public antraege2(status: string): Array<Urlaubsantrag> {
+    let result = Array<Urlaubsantrag>();
+
+    if (this.mitarbeiter.urlaubsantraegeMitarbeiter != null) {
+      this.mitarbeiter.urlaubsantraegeMitarbeiter.forEach(antrag => {
+        if (antrag.status == status || status == '')
+          result.push(antrag);
+      });
+      result.sort((a1, a2) => {
+        const m1 = a1.status;
+        const m2 = a2.status;
+
+        if (m1 > m2) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+    }
+
+    return result;
+  }
+
+  public antragLoeschen(id: number): void {
         // TODO
     }
+
+  public statusAendern(antrag: Urlaubsantrag, status: string): void {
+    this.speicherService.statusAendern(antrag, status);
+  }
 
   public erstellen(form: Form): void {
     console.log("Pressed");

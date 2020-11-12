@@ -88,7 +88,8 @@ export class UrlaubsantragService {
     }
 
     private handleError(error: any): Promise<any> {
-        console.log('Interner Fehler: ' + error.message);
+      console.log('Interner Fehler: ' + error.message);
+      alert('Interner Fehler: ' + error.message);
         return Promise.reject(error.message || error);
     }
 }
