@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\models",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\antraege",
+    "\\src\\app\\pages\\login",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\services\\UrlaubsantragService.service.ts",
+  "PreviewInSolutionExplorer": false
+}
