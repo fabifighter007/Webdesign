@@ -44,7 +44,7 @@
               <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
               <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
               <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
-              <td>{{ tage(antrag.von, antrag.bis) }}</td>
+              <td>{{ berechneTageDarstellung(antrag.von, antrag.bis) }}</td>
               <td>{{ antrag.status }}</td>
               <td>
                 <button class="btn btn-success" (click)="statusAendern(antrag, 'genehmigt')"
@@ -60,7 +60,7 @@
 
 
               <td>
-                <button class="btn btn-warning" [hidden]="antrag.status == 'unbearbeitet'">
+                <button class="btn btn-warning" [hidden]="antrag.status == 'unbearbeitet'" (click)="antragLoeschen(antrag.id)">
                   löschen
                 </button>
               </td>
@@ -127,7 +127,7 @@
               <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
               <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
               <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
-              <td>{{ tage(antrag.von, antrag.bis) }}</td>
+              <td>{{ berechneTageDarstellung(antrag.von, antrag.bis) }}</td>
               <td>{{ antrag.status }}</td>
               <td>{{ antrag.bemerkung }}</td>
               <td>
@@ -173,14 +173,12 @@
           <div class="form-group row">
             <label for="anzahl_tage" class="col-sm-2 col-form-label">Anzahl</label>
             <div class="col-sm-8">
-              <label for="ausgabe_tage" class="col-sm-2 col-form-label">hier einfügen</label><br />
+              <label for="ausgabe_tage" class="col-sm-2 col-form-label">{{tage(start_datum, end_datum)}}</label><br />
             </div>
           </div>
-
         </form>
-
-
       </div>
+
       <div class="modal-footer">
 
         <div class="form-group row">
@@ -217,7 +215,7 @@
 
       <div class="modal-footer">
         <div class="form-group row">
-          <button class="btn btn-danger " name="submit" type="submit">
+          <button class="btn btn-danger" name="submit" type="submit" (click)="antragAblehnen(ablehnenForm)" >
             Antrag ablehnen
           </button>
         </div>

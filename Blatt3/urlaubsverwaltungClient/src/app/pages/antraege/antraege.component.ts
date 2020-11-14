@@ -24,6 +24,8 @@ export class AntraegeComponent implements OnInit {
 
     public start_datum: string;
     public end_datum: string;
+    public testvar: Urlaubsantrag;
+
 
     public constructor(private router: Router, private speicherService: UrlaubsantragService, 
             private loginService: LoginService) {
@@ -54,18 +56,38 @@ export class AntraegeComponent implements OnInit {
         const bisMoment = moment(bis);
         let urlaubstage = 0;
 
+      if (this.start_datum != null && this.end_datum != null && this.end_datum > this.start_datum) {
         while (true) {
-            const day = vonMoment.weekday();
-            if (day > 0 && day < 6) { // 0 = Sonntag, 6 = Samstag
-                urlaubstage++;
-            }
-            if (vonMoment.isSame(bisMoment)) 
-                break;
-            vonMoment.add(1, 'days');
+          const day = vonMoment.weekday();
+          if (day > 0 && day < 6) { // 0 = Sonntag, 6 = Samstag
+            urlaubstage++;
+          }
+          if (vonMoment.isSame(bisMoment))
+            break;
+          vonMoment.add(1, 'days');
         }
+      } else {
 
+      }
         return urlaubstage;
-    }
+  }
+
+  public berechneTageDarstellung(von: string, bis: string): number {
+    let vonMoment = moment(von);
+    const bisMoment = moment(bis);
+    let urlaubstage = 0;
+
+      while (true) {
+        const day = vonMoment.weekday();
+        if (day > 0 && day < 6) { // 0 = Sonntag, 6 = Samstag
+          urlaubstage++;
+        }
+        if (vonMoment.isSame(bisMoment))
+          break;
+        vonMoment.add(1, 'days');
+      }
+    return urlaubstage;
+  }
 
     /**
      * Schliesst den Dialog zum Stellen eines Antrags.
@@ -120,7 +142,7 @@ export class AntraegeComponent implements OnInit {
     return result;
   }
 
-  /*
+  
   public antragLoeschen(id: number): void {
     if (this.aktuellerAntrag.status == "unbearbeitet") {
       this.speicherService.loescheUrlaubsantrag(id);
@@ -129,33 +151,33 @@ export class AntraegeComponent implements OnInit {
     }
         // TODO
     }
-*/
+
 
   public statusAendern(antrag: Urlaubsantrag, status: string): void {
     this.speicherService.statusAendern(antrag, status);
   }
 
-  /*
+  
   public antragAblehnen(form: Form): void {
     console.log(this.bemerkung);
-    this.bemerkung = this.bemerkung;
-    this.aktuellerAntrag.bemerkung = this.bemerkung;
-    this.speicherService.statusAendern(this.aktuellerAntrag, "abgelehnt");
+    this.testvar.bemerkung = this.bemerkung;
+    this.speicherService.statusAendern(this.testvar, "abgelehnt");
   }
-  */
+
 
   public setAktuellerAuftrag(a: Urlaubsantrag): void {
-    this.aktuellerAntrag = a;
+    this.testvar = a;
   }
 
   public erstellen(form: Form): void {
     console.log("Pressed");
     if (this.start_datum == undefined || this.end_datum == undefined) {
 
-    } else {
-      this.aktuellerAntrag = new Urlaubsantrag(UrlaubsantragService.length, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD"), "unbearbeitet", this.bemerkung);
+    } else { //-1 neu
+      this.aktuellerAntrag = new Urlaubsantrag(-1, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD HH:MM:SS"), "unbearbeitet", this.bemerkung);
       this.speicherService.speichereUrlaubsantrag(this.aktuellerAntrag);
       this.antragStellenDialogSchliessen();
+      this.mitarbeiter.urlaubsantraege.push(this.aktuellerAntrag);
     }
     }
 }

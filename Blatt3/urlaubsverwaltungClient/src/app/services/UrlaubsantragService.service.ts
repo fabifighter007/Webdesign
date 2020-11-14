@@ -44,7 +44,13 @@ export class UrlaubsantragService {
                 return antraege;
             })
             .catch(this.handleError);
-    }
+  }
+  public getAntragZuID(id: number): Urlaubsantrag {
+    var res: Urlaubsantrag;
+
+
+    return res;
+  }
 
     /**
      * Liefert den Mitarbeiter zu 'mitarbeiterId'.
