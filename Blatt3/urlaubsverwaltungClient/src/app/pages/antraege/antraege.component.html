@@ -131,8 +131,7 @@
               <td>{{ antrag.status }}</td>
               <td>{{ antrag.bemerkung }}</td>
               <td>
-                <button class="btn btn-warning" (click)="antragLoeschen(antrag.id)"
-                        [disabled]="antrag.status != 'unbearbeitet'">
+                <button class="btn btn-warning" (click)="antragLoeschen(antrag.id)" [disabled]="antrag.status != 'unbearbeitet'">
                   löschen
                 </button>
               </td>
@@ -180,7 +179,6 @@
       </div>
 
       <div class="modal-footer">
-
         <div class="form-group row">
           <button class="btn btn-primary " name="submit" type="submit" (click)="erstellen(timeForm)">
             senden
@@ -214,11 +212,17 @@
       </div>
 
       <div class="modal-footer">
+
         <div class="form-group row">
-          <button class="btn btn-danger" name="submit" type="submit" (click)="antragAblehnen(ablehnenForm)" >
+          <button class="btn btn-danger" name="submit" type="submit" (click)="antragAblehnen(ablehnenForm)">
             Antrag ablehnen
           </button>
         </div>
+
+        <div class="form-group row">
+          <button type="button" class="btn btn-primary" id="antrag-stellen-dialog-schliessen" data-dismiss="modal">abbrechen</button>
+        </div>
+
       </div>
     </div>
   </div>

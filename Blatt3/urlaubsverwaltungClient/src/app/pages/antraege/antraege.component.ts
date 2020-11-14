@@ -174,7 +174,7 @@ export class AntraegeComponent implements OnInit {
     if (this.start_datum == undefined || this.end_datum == undefined) {
 
     } else { //-1 neu
-      this.aktuellerAntrag = new Urlaubsantrag(-1, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD HH:MM:SS"), "unbearbeitet", this.bemerkung);
+      this.aktuellerAntrag = new Urlaubsantrag(UrlaubsantragService.length, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD HH:MM:SS"), "unbearbeitet", this.bemerkung);
       this.speicherService.speichereUrlaubsantrag(this.aktuellerAntrag);
       this.antragStellenDialogSchliessen();
       this.mitarbeiter.urlaubsantraege.push(this.aktuellerAntrag);
