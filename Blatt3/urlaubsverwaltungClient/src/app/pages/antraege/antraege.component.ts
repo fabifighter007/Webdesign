@@ -94,7 +94,8 @@ export class AntraegeComponent implements OnInit {
      */
     public antragStellenDialogSchliessen(): void {
         document.getElementById('antrag-stellen-dialog-schliessen').click();
-    }
+  }
+
 
     public antraege(status: string): Array<Urlaubsantrag> {
         let result = Array<Urlaubsantrag>();
@@ -143,15 +144,33 @@ export class AntraegeComponent implements OnInit {
   }
 
   
-  public antragLoeschen(id: number): void {
+  public antragLoeschen(a: Urlaubsantrag): void {
+    this.aktuellerAntrag = a;
     if (this.aktuellerAntrag.status == "unbearbeitet") {
-      this.speicherService.loescheUrlaubsantrag(id);
-    } else {
-      
-    }
-        // TODO
-    }
+      let i = 0;
+      for (let antrag of this.mitarbeiter.urlaubsantraege) {
+        if (antrag.id == a.id) {
+          this.mitarbeiter.urlaubsantraege.splice(i, 1);
+          break;
+        }
+        i++;
+      }
+      this.speicherService.loescheUrlaubsantrag(this.aktuellerAntrag.id);
 
+    } else {
+      let i = 0;
+      for (let antrag of this.mitarbeiter.urlaubsantraegeMitarbeiter) {
+        if (antrag.id == a.id) {
+          console.log("Antrag gefunden:" + antrag.id);
+          this.mitarbeiter.urlaubsantraegeMitarbeiter.splice(i, 1);
+          break;
+        }
+        i++;
+      }
+
+      this.speicherService.loescheUrlaubsantrag(this.aktuellerAntrag.id);
+    }
+  }
 
   public statusAendern(antrag: Urlaubsantrag, status: string): void {
     this.speicherService.statusAendern(antrag, status);
@@ -160,13 +179,15 @@ export class AntraegeComponent implements OnInit {
   
   public antragAblehnen(form: Form): void {
     console.log(this.bemerkung);
-    this.testvar.bemerkung = this.bemerkung;
-    this.speicherService.statusAendern(this.testvar, "abgelehnt");
+    this.aktuellerAntrag.bemerkung = this.bemerkung;
+    this.speicherService.statusAendern(this.aktuellerAntrag, "abgelehnt");
+    this.bemerkung = "";
   }
 
 
   public setAktuellerAuftrag(a: Urlaubsantrag): void {
-    this.testvar = a;
+    this.aktuellerAntrag = a;
+    console.log(this.aktuellerAntrag.antragsteller);
   }
 
   public erstellen(form: Form): void {
@@ -174,10 +195,19 @@ export class AntraegeComponent implements OnInit {
     if (this.start_datum == undefined || this.end_datum == undefined) {
 
     } else { //-1 neu
-      this.aktuellerAntrag = new Urlaubsantrag(UrlaubsantragService.length, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD HH:MM:SS"), "unbearbeitet", this.bemerkung);
-      this.speicherService.speichereUrlaubsantrag(this.aktuellerAntrag);
+      //UrlaubsantragService.length
+      this.aktuellerAntrag = new Urlaubsantrag(-1, this.start_datum, this.end_datum, this.mitarbeiter.id, this.mitarbeiter.name, moment().format("YYYY-MM-DD hh:mm:ss"), "unbearbeitet", this.bemerkung);
+      this.speicherService.speichereUrlaubsantrag(this.aktuellerAntrag)
+        .then((n: number) => {
+          this.aktuellerAntrag.id = n;
+          this.mitarbeiter.urlaubsantraege.push(this.aktuellerAntrag);
+        })
+        .catch(() => alert("Es ist ein Fehler aufgetreten!"));
+
       this.antragStellenDialogSchliessen();
-      this.mitarbeiter.urlaubsantraege.push(this.aktuellerAntrag);
+      //this.mitarbeiter.urlaubsantraege.push(this.aktuellerAntrag);
+      this.start_datum = undefined;
+      this.end_datum = undefined;
     }
     }
 }

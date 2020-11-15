@@ -41,7 +41,7 @@
             <tr *ngFor="let antrag of antraege2(''); let i = index">
               <td>{{ i+1 }}</td>
               <td>{{ antrag.antragsteller }}</td>
-              <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
+              <td>{{ antrag.zeitstempel | date:'YYYY-MM-dd hh:mm:ss' }}</td>
               <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
               <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
               <td>{{ berechneTageDarstellung(antrag.von, antrag.bis) }}</td>
@@ -53,14 +53,14 @@
                 </button>
               </td>
               <td>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#ablehnen-dialog" (click)="setAktuellerAuftrag(antrag)" [hidden]="antrag.status != 'unbearbeitet'">
+                <button class="btn btn-danger" (click)="setAktuellerAuftrag(antrag)" data-toggle="modal" data-target="#ablehnen-dialog"  [hidden]="antrag.status != 'unbearbeitet'">
                   ablehnen
                 </button>
               </td>
 
 
               <td>
-                <button class="btn btn-warning" [hidden]="antrag.status == 'unbearbeitet'" (click)="antragLoeschen(antrag.id)">
+                <button class="btn btn-warning" [hidden]="antrag.status == 'unbearbeitet'" (click)="antragLoeschen(antrag)">
                   löschen
                 </button>
               </td>
@@ -124,14 +124,14 @@
           <tbody>
             <tr *ngFor="let antrag of antraege(''); let i = index">
               <td>{{ i+1 }}</td>
-              <td>{{ antrag.zeitstempel | date:'dd.MM.yyyy HH:mm' }}</td>
+              <td>{{ antrag.zeitstempel | date:'YYYY-MM-dd hh:mm:ss' }}</td>
               <td>{{ antrag.von | date:'dd.MM.yyyy' }}</td>
               <td>{{ antrag.bis | date:'dd.MM.yyyy' }}</td>
               <td>{{ berechneTageDarstellung(antrag.von, antrag.bis) }}</td>
               <td>{{ antrag.status }}</td>
               <td>{{ antrag.bemerkung }}</td>
               <td>
-                <button class="btn btn-warning" (click)="antragLoeschen(antrag.id)" [disabled]="antrag.status != 'unbearbeitet'">
+                <button class="btn btn-warning" (click)="antragLoeschen(antrag)" [disabled]="antrag.status != 'unbearbeitet'">
                   löschen
                 </button>
               </td>
@@ -150,7 +150,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>Urlaubsantrag stellen</h4>
+
+        <button type="button" class="close" data-dismiss="modal"
+                id="antrag-stellen-dialog-schliessen">
+          &times;
+        </button>
+
       </div>
+
       <div class="modal-body">
 
         <form class="antraege-bearbeiten-container form" role="form" #timeForm="ngForm">
@@ -199,6 +206,12 @@
     <div class="modal-content">
       <div class="modal-header">
         Urlaubsantrag ablehnen
+
+        <button type="button" class="close" data-dismiss="modal"
+                id="antrag-stellen-dialog-schliessen">
+          &times;
+        </button>
+
       </div>
       <div class="modal-body">
         <form class="antraege-bearbeiten-container form" role="form" #ablehnenForm="ngForm">
