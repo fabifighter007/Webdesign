@@ -3,12 +3,11 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\models",
     "\\src\\app\\pages",
-    "\\src\\app\\pages\\antraege",
     "\\src\\app\\pages\\login",
-    "\\src\\app\\services"
+    "\\src\\assets",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\services\\UrlaubsantragService.service.ts",
+  "SelectedNode": "\\src\\app\\pages\\login\\login.component.html",
   "PreviewInSolutionExplorer": false
 }

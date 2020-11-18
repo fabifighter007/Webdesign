@@ -92,8 +92,12 @@ export class AntraegeComponent implements OnInit {
     /**
      * Schliesst den Dialog zum Stellen eines Antrags.
      */
-    public antragStellenDialogSchliessen(): void {
-        document.getElementById('antrag-stellen-dialog-schliessen').click();
+  public antragStellenDialogSchliessen(): void {
+    document.getElementById('antrag-stellen-dialog-schliessen').click();
+  }
+
+  public antragAblehnenDialogSchliessen(): void {
+    document.getElementById('antrag-ablehnen-dialog-schliessen').click();
   }
 
 
@@ -178,10 +182,15 @@ export class AntraegeComponent implements OnInit {
 
   
   public antragAblehnen(form: Form): void {
-    console.log(this.bemerkung);
-    this.aktuellerAntrag.bemerkung = this.bemerkung;
-    this.speicherService.statusAendern(this.aktuellerAntrag, "abgelehnt");
-    this.bemerkung = "";
+    if (this.bemerkung == "") {
+      alert("Der Antrag wurde nicht abgelehnt, da eine Bemerkung benötigt wird!");
+    } else {
+      this.aktuellerAntrag.bemerkung = this.bemerkung;
+      this.speicherService.statusAendern(this.aktuellerAntrag, "abgelehnt");
+      this.bemerkung = "";
+      this.antragAblehnenDialogSchliessen();
+    }
+
   }
 
 
