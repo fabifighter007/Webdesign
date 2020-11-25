@@ -21,6 +21,8 @@ session_start();
         
         $errors = array();
 
+
+
         if($action == "send") {
 
             if(($password)!=($geheim)) {

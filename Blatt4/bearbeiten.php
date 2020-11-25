@@ -23,7 +23,7 @@ session_start();
         <div class = "center">
         <form name="contact" action="handler.php" method="post">
             <label for="name" class="myLabel">Name</label>
-            <input id="name" name="name" class="myInput" type="text" /> <br>
+            <input id="name" name="name" class="myInput" type="text" value= "<?php echo $_SESSION['name']?>"/> <br>
 
             <label for="ort" class="myLabel">Geburtsort</label>
             <input id="ort" name="ort" class="myInput" type="text" /> <br>
