@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<?php
+// Start the session
+session_start();
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Willkommen auf der Homepage von Bart Simpson</title>
@@ -8,6 +13,17 @@
 
 </head>
 <body class="sansserif">
+
+<?php
+if(isset($_SESSION["name"])) {
+   
+} else {
+    $_SESSION["name"] = "Bart Simpson";
+    $_SESSION["ort"] = "Springfield";
+    $_SESSION["datum"] = "1. April 1980";
+}
+?>
+
     <h1 class="headline">Willkommen auf der Homepage von Bart Simpson!</h1>
     <div class="blackbox">
 
@@ -34,15 +50,15 @@
                             <table id="steckbrief">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Bart Simpson</th>
+                                    <th> <?php echo $_SESSION["name"]?> </th>
                                 </tr>
                                 <tr>
                                     <th>Geburtsdatum</th>
-                                    <th>1. April 1980</th>
+                                    <th> <?php echo $_SESSION["datum"]?> </th>
                                 </tr>
                                 <tr>
                                     <th>Ort</th>
-                                    <th>Springfield </th>
+                                    <th> <?php echo $_SESSION["ort"]?> </th>
                                 </tr>
                                 <tr>
                                     <th>Hobbies</th>
@@ -50,12 +66,7 @@
                                 </tr>
                             </table>
                         </div>
-
                     </div>
-
-
-
-
 
                 </div>
                 <div class="tab2">
@@ -77,8 +88,10 @@
     </div>
 
     <div class="wrapper">
-        <button class="button">Angaben ändern</button>
-    </div>
 
+        <form action="login.php">
+            <input type="submit" value="Angaben ändern" />
+        </form>
+    </div>
 </body>
 </html>
